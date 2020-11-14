@@ -1,21 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { todoContext } from "../../context/todo_context";
 import { Axios } from "../../utils/axios";
 const Todo_Form = () => {
-    const [todo, setTodo] = useState({
+    const [info, setInfo] = useState({
         name: "",
         created_at: Date.now(),
     });
 
+    const data = useContext(todoContext);
+
     const submit = async (e) => {
         e.preventDefault();
-        console.log(todo);
-        setTodo(todo);
-        const response = await Axios().post(`/todos/`, todo);
-        console.log(response.data);
+        const response = await Axios().post(`/todos/`, info);
+        data.setTodo([...data.todo, response.data]);
     };
 
     const change = (e) => {
-        setTodo({ ...todo, [e.target.name]: e.target.value });
+        setInfo({ ...info, [e.target.name]: e.target.value });
     };
     return (
         <div className="todo_form">
@@ -25,7 +26,7 @@ const Todo_Form = () => {
                     type="text"
                     placeholder="Enter Your Todo"
                     name="name"
-                    value={todo.name}
+                    value={info.name}
                     onChange={change}
                 />
                 <input type="submit" />
