@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { Axios } from "../../utils/axios";
 import { todoContext } from "../../context/todo_context";
+import "./todo_container.scss";
 
 const Todo_Container = () => {
     const { todo, setTodo } = useContext(todoContext);
@@ -8,18 +9,18 @@ const Todo_Container = () => {
         const getTodos = async () => {
             const response = await Axios().get("/todos");
             setTodo(...todo, response.data);
-            console.log(todo);
         };
         getTodos();
     }, []);
     return (
         <div className="todo_container">
             <h1>Here are you todos</h1>
-            {todo.map((todo) => {
+            {todo.map((el, index) => {
                 return (
-                    <ul key={todo.id}>
-                        <li>{todo.name}</li>
-                    </ul>
+                    <div key={index}>
+                        <h3>{el.name}</h3>
+                        <button>Delete</button>
+                    </div>
                 );
             })}
         </div>

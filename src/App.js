@@ -1,6 +1,7 @@
 import TodoForm from "./components/todo_form/todo_form";
 import TodoContainer from "./components/todo_container/todo_container";
 import Context from "./context/todo_context";
+import "./app.scss";
 function App() {
     return (
         <Context>

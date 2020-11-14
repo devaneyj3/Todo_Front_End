@@ -13,6 +13,7 @@ const Todo_Form = () => {
         e.preventDefault();
         const response = await Axios().post(`/todos/`, info);
         data.setTodo([...data.todo, response.data]);
+        setInfo({ name: "", created_at: Date.now() });
     };
 
     const change = (e) => {
