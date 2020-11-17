@@ -1,18 +1,15 @@
-import React, { useState, useContext } from "react";
-import { todoContext } from "../../context/todo_context";
-import { Axios } from "../../utils/axios";
-const Todo_Form = () => {
+import React, { useState } from "react";
+import { create_todo } from "../../actions/todo_action";
+import { connect } from "react-redux";
+const Todo_Form = ({ create_todo }) => {
     const [info, setInfo] = useState({
         name: "",
         created_at: Date.now(),
     });
 
-    const data = useContext(todoContext);
-
     const submit = async (e) => {
         e.preventDefault();
-        const response = await Axios().post(`/todos/`, info);
-        data.setTodo([...data.todo, response.data]);
+        create_todo(info);
         setInfo({ name: "", created_at: Date.now() });
     };
 
@@ -36,4 +33,10 @@ const Todo_Form = () => {
     );
 };
 
-export default Todo_Form;
+const mapStateToProps = (state) => {
+    return {
+        todos: state.todos,
+    };
+};
+
+export default connect(mapStateToProps, { create_todo })(Todo_Form);

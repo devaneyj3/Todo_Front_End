@@ -1,28 +1,26 @@
-import React, { useContext, useEffect } from "react";
-import { Axios } from "../../utils/axios";
-import { todoContext } from "../../context/todo_context";
+import React, { useEffect } from "react";
 import "./todo_container.scss";
 
 const Todo_Container = () => {
-    const { todo, setTodo } = useContext(todoContext);
-    useEffect(() => {
-        const getTodos = async () => {
-            const response = await Axios().get("/todos");
-            setTodo(...todo, response.data);
-        };
-        getTodos();
-    }, []);
+    // useEffect(() => {
+    //     const getTodos = async () => {};
+    //     getTodos();
+    // }, []);
+
+    const deleteItem = (item) => {
+        console.log("deleting, ", item.id);
+    };
     return (
         <div className="todo_container">
             <h1>Here are you todos</h1>
-            {todo.map((el, index) => {
+            {/* {todo.map((el) => {
                 return (
-                    <div key={index}>
+                    <div key={el.id}>
                         <h3>{el.name}</h3>
-                        <button>Delete</button>
+                        <button onClick={() => deleteItem(el)}>Delete</button>
                     </div>
                 );
-            })}
+            })} */}
         </div>
     );
 };

@@ -1,15 +1,20 @@
 import TodoForm from "./components/todo_form/todo_form";
 import TodoContainer from "./components/todo_container/todo_container";
-import Context from "./context/todo_context";
+import { applyMiddleware, createStore } from "redux";
+import thunk from "redux-thunk";
+import { Provider } from "react-redux";
+import TodoReducer from "./reducer/todo_reducer";
 import "./app.scss";
+
+const store = createStore(TodoReducer, applyMiddleware(thunk));
 function App() {
     return (
-        <Context>
+        <Provider store={store}>
             <div className="App">
                 <TodoForm />
                 <TodoContainer />
             </div>
-        </Context>
+        </Provider>
     );
 }
 
