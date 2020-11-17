@@ -5,6 +5,7 @@ import thunk from "redux-thunk";
 import { Provider } from "react-redux";
 import TodoReducer from "./reducer/todo_reducer";
 import "./app.scss";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const store = createStore(TodoReducer, applyMiddleware(thunk));
 function App() {

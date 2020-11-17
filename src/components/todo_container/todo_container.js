@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { get_todos } from "../../actions/todo_action";
+import { get_todos, delete_todo } from "../../actions/todo_action";
+import { Alert } from "reactstrap";
 import "./todo_container.scss";
 
-const Todo_Container = ({ todos, get_todos }) => {
+const Todo_Container = ({ todos, get_todos, delete_todo }) => {
     useEffect(() => {
         const getTodos = async () => {
             get_todos();
@@ -12,11 +13,14 @@ const Todo_Container = ({ todos, get_todos }) => {
     }, []);
 
     const deleteItem = (item) => {
-        console.log("deleting, ", item.id);
+        delete_todo(item.id);
     };
     return (
         <div className="todo_container">
             <h1>Here are you todos</h1>
+            {todos.length < 1 ? (
+                <Alert color="danger">There are no todos</Alert>
+            ) : null}
             {todos.map((el) => {
                 return (
                     <div key={el.id}>
@@ -35,4 +39,6 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps, { get_todos })(Todo_Container);
+export default connect(mapStateToProps, { get_todos, delete_todo })(
+    Todo_Container
+);
