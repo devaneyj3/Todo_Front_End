@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { create_todo } from "../../actions/todo_action";
 import { connect } from "react-redux";
+import "./todo_form.scss";
 const Todo_Form = ({ create_todo }) => {
     const [info, setInfo] = useState({
         name: "",
@@ -18,7 +19,6 @@ const Todo_Form = ({ create_todo }) => {
     };
     return (
         <div className="todo_form">
-            <h3>Enter your todos</h3>
             <form onSubmit={submit}>
                 <input
                     type="text"

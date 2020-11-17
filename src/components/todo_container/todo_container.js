@@ -3,6 +3,15 @@ import { connect } from "react-redux";
 import { get_todos, delete_todo } from "../../actions/todo_action";
 import { Alert } from "reactstrap";
 import "./todo_container.scss";
+import {
+    Card,
+    Button,
+    CardHeader,
+    CardFooter,
+    CardBody,
+    CardTitle,
+    CardText,
+} from "reactstrap";
 
 const Todo_Container = ({ todos, get_todos, delete_todo }) => {
     useEffect(() => {
@@ -17,18 +26,29 @@ const Todo_Container = ({ todos, get_todos, delete_todo }) => {
     };
     return (
         <div className="todo_container">
-            <h1>Here are you todos</h1>
+            <h3>Here are you todos</h3>
             {todos.length < 1 ? (
                 <Alert color="danger">There are no todos</Alert>
             ) : null}
-            {todos.map((el) => {
-                return (
-                    <div key={el.id}>
-                        <h3>{el.name}</h3>
-                        <button onClick={() => deleteItem(el)}>Delete</button>
-                    </div>
-                );
-            })}
+            <section className="card_container">
+                {todos.map((el) => {
+                    return (
+                        <Card key={el.id}>
+                            <CardHeader>{el.name}</CardHeader>
+                            <CardBody>
+                                <CardText></CardText>
+                                <Button
+                                    color="danger"
+                                    onClick={() => deleteItem(el)}
+                                >
+                                    Delete
+                                </Button>
+                            </CardBody>
+                            <CardFooter />
+                        </Card>
+                    );
+                })}
+            </section>
         </div>
     );
 };
