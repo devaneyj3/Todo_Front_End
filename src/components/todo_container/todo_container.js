@@ -9,7 +9,6 @@ import {
     CardHeader,
     CardFooter,
     CardBody,
-    CardTitle,
     CardText,
 } from "reactstrap";
 
@@ -26,7 +25,6 @@ const Todo_Container = ({ todos, get_todos, delete_todo }) => {
     };
     return (
         <div className="todo_container">
-            <h3>Here are you todos</h3>
             {todos.length < 1 ? (
                 <Alert color="danger">There are no todos</Alert>
             ) : null}
@@ -44,7 +42,7 @@ const Todo_Container = ({ todos, get_todos, delete_todo }) => {
                                     Delete
                                 </Button>
                             </CardBody>
-                            <CardFooter />
+                            <CardFooter>Created on: {el.created_at}</CardFooter>
                         </Card>
                     );
                 })}

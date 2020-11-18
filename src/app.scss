@@ -1,6 +1,12 @@
 
 .App {
   margin: 5%;
+  .stat_form {
+    display: flex;
+    height: 250px;
+    margin: 10%;
+    justify-content: flex-end;
+  }
 }
 li {
   list-style: none;

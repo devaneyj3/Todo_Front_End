@@ -1,17 +1,21 @@
 import React, { useState } from "react";
 import { create_todo } from "../../actions/todo_action";
 import { connect } from "react-redux";
+import moment from "moment";
 import "./todo_form.scss";
 const Todo_Form = ({ create_todo }) => {
     const [info, setInfo] = useState({
         name: "",
-        created_at: Date.now(),
+        created_at: moment().format("llll"),
     });
 
     const submit = async (e) => {
         e.preventDefault();
         create_todo(info);
-        setInfo({ name: "", created_at: Date.now() });
+        setInfo({
+            name: "",
+            created_at: moment().format("llll"),
+        });
     };
 
     const change = (e) => {

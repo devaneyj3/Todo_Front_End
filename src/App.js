@@ -4,6 +4,7 @@ import { applyMiddleware, createStore } from "redux";
 import thunk from "redux-thunk";
 import { Provider } from "react-redux";
 import TodoReducer from "./reducer/todo_reducer";
+import Stats from "./components/stats/stats";
 import "./app.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -12,7 +13,10 @@ function App() {
     return (
         <Provider store={store}>
             <div className="App">
-                <TodoForm />
+                <section className="stat_form">
+                    <TodoForm />
+                    <Stats />
+                </section>
                 <TodoContainer />
             </div>
         </Provider>

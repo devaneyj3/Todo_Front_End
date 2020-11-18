@@ -1,0 +1,12 @@
+.stat_box {
+  border: 1px solid black;
+  border-radius: 20px;
+  padding: 5%;
+  font-size: 12px;
+  font-weight:bold;
+  background-color: lightgray;
+  align-self: flex-end;
+  p{
+    color: green;
+  }
+}

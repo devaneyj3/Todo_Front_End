@@ -3,5 +3,11 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+    .card-footer {
+      font-weight: lighter;
+      font-style: italic;
+      font-size: 12px;
+      text-align: right;
+    }
   }
 }
