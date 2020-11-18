@@ -20,18 +20,21 @@ const Todo_Container = ({ todos, get_todos, delete_todo }) => {
         getTodos();
     }, []);
 
+    const markComplete = (e) => {
+        e.target.classList.toggle("completed");
+    };
     const deleteItem = (item) => {
         delete_todo(item.id);
     };
     return (
         <div className="todo_container">
-            {todos.length < 1 ? (
-                <Alert color="danger">There are no todos</Alert>
-            ) : null}
             <section className="card_container">
+                {todos.length < 1 ? (
+                    <Alert color="danger">There are no todos</Alert>
+                ) : null}
                 {todos.map((el) => {
                     return (
-                        <Card key={el.id}>
+                        <Card key={el.id} onClick={markComplete}>
                             <CardHeader>{el.name}</CardHeader>
                             <CardBody>
                                 <CardText></CardText>

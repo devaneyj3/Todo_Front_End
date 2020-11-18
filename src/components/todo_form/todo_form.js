@@ -7,6 +7,7 @@ const Todo_Form = ({ create_todo }) => {
     const [info, setInfo] = useState({
         name: "",
         created_at: moment().format("llll"),
+        completed: "no",
     });
 
     const submit = async (e) => {
@@ -15,6 +16,7 @@ const Todo_Form = ({ create_todo }) => {
         setInfo({
             name: "",
             created_at: moment().format("llll"),
+            completed: "no",
         });
     };
 
