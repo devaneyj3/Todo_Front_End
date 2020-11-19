@@ -23,6 +23,10 @@ const TodoReducer = (state = initialState, action) => {
             return {
                 todos: state.todos.filter((todo) => todo.id !== action.payload),
             };
+        case TOGGLE_COMPLETE:
+            return {
+                todos: [...state.todos],
+            };
         default:
             return state;
     }

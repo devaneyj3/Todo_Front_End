@@ -36,7 +36,6 @@ export const toggle_complete = (id, data) => async (dispatch) => {
         const response = await Axios().put(
             `/todos/${id}/toggleComplete/${data}`
         );
-        console.log(response.data);
         dispatch({ type: TOGGLE_COMPLETE, payload: response.data });
     } catch (error) {
         dispatch({ type: TOGGLE_COMPLETE, payload: error });

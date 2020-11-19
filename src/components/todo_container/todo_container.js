@@ -24,7 +24,7 @@ const Todo_Container = ({ todos, get_todos, delete_todo, toggle_complete }) => {
         getTodos();
     }, []);
 
-    const markComplete = (e, el) => {
+    const markComplete = async (e, el) => {
         e.target.classList.toggle("completed");
         el.completed === "no" ? (el.completed = "yes") : (el.completed = "no");
         toggle_complete(el.id, el.completed);
@@ -40,7 +40,13 @@ const Todo_Container = ({ todos, get_todos, delete_todo, toggle_complete }) => {
                 ) : null}
                 {todos.map((el) => {
                     return (
-                        <Card key={el.id} onClick={(e) => markComplete(e, el)}>
+                        <Card
+                            className={
+                                el.completed === "yes" ? "completed" : null
+                            }
+                            key={el.id}
+                            onClick={(e) => markComplete(e, el)}
+                        >
                             <CardHeader>{el.name}</CardHeader>
                             <CardBody>
                                 <CardText></CardText>
