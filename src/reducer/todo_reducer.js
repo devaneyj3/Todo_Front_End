@@ -13,7 +13,7 @@ const TodoReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_TODO:
             return {
-                todos: [...state.todos, action.payload],
+                todos: action.payload,
             };
         case GET_TODO:
             return {

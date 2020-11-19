@@ -3,10 +3,10 @@ import { connect } from "react-redux";
 import { get_todos } from "../../actions/todo_action";
 import "./stats.scss";
 
-const Stats = ({ todos }) => {
+const Stats = ({ todos, get_todos }) => {
     useEffect(() => {
         get_todos();
-    }, [todos]);
+    }, [get_todos]);
 
     return (
         <section className="stat_box">
