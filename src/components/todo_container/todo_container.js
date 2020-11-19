@@ -1,6 +1,10 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { get_todos, delete_todo } from "../../actions/todo_action";
+import {
+    get_todos,
+    delete_todo,
+    toggle_complete,
+} from "../../actions/todo_action";
 import { Alert } from "reactstrap";
 import "./todo_container.scss";
 import {
@@ -12,7 +16,7 @@ import {
     CardText,
 } from "reactstrap";
 
-const Todo_Container = ({ todos, get_todos, delete_todo }) => {
+const Todo_Container = ({ todos, get_todos, delete_todo, toggle_complete }) => {
     useEffect(() => {
         const getTodos = async () => {
             get_todos();
@@ -20,8 +24,10 @@ const Todo_Container = ({ todos, get_todos, delete_todo }) => {
         getTodos();
     }, []);
 
-    const markComplete = (e) => {
+    const markComplete = (e, el) => {
         e.target.classList.toggle("completed");
+        el.completed === "no" ? (el.completed = "yes") : (el.completed = "no");
+        toggle_complete(el.id, el.completed);
     };
     const deleteItem = (item) => {
         delete_todo(item.id);
@@ -34,7 +40,7 @@ const Todo_Container = ({ todos, get_todos, delete_todo }) => {
                 ) : null}
                 {todos.map((el) => {
                     return (
-                        <Card key={el.id} onClick={markComplete}>
+                        <Card key={el.id} onClick={(e) => markComplete(e, el)}>
                             <CardHeader>{el.name}</CardHeader>
                             <CardBody>
                                 <CardText></CardText>
@@ -60,6 +66,8 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps, { get_todos, delete_todo })(
-    Todo_Container
-);
+export default connect(mapStateToProps, {
+    get_todos,
+    delete_todo,
+    toggle_complete,
+})(Todo_Container);
