@@ -49,7 +49,7 @@ const Todo_Container = ({ todos, get_todos, delete_todo, toggle_complete }) => {
                         >
                             <CardHeader>{el.name}</CardHeader>
                             <CardBody>
-                                <CardText></CardText>
+                                <CardText>{el.description}</CardText>
                                 <Button
                                     color="danger"
                                     onClick={() => deleteItem(el)}

@@ -6,6 +6,7 @@ import "./todo_form.scss";
 const Todo_Form = ({ create_todo }) => {
     const [info, setInfo] = useState({
         name: "",
+        description: "",
         created_at: moment().format("llll"),
         completed: "no",
     });
@@ -15,6 +16,7 @@ const Todo_Form = ({ create_todo }) => {
         create_todo(info);
         setInfo({
             name: "",
+            description: "",
             created_at: moment().format("llll"),
             completed: "no",
         });
@@ -31,6 +33,12 @@ const Todo_Form = ({ create_todo }) => {
                     placeholder="Enter Your Todo"
                     name="name"
                     value={info.name}
+                    onChange={change}
+                />
+                <textarea
+                    placeholder="Enter Description"
+                    name="description"
+                    value={info.description}
                     onChange={change}
                 />
                 <input type="submit" />
