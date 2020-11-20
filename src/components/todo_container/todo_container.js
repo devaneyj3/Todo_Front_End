@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import moment from "moment";
 import { connect } from "react-redux";
 import {
     get_todos,
@@ -13,6 +14,7 @@ import {
     CardHeader,
     CardFooter,
     CardBody,
+    CardTitle,
     CardText,
 } from "reactstrap";
 
@@ -26,8 +28,14 @@ const Todo_Container = ({ todos, get_todos, delete_todo, toggle_complete }) => {
 
     const markComplete = async (e, el) => {
         e.target.classList.toggle("completed");
-        el.completed === "no" ? (el.completed = "yes") : (el.completed = "no");
-        toggle_complete(el.id, el.completed);
+        if (el.completed === "no") {
+            el.completed = "yes";
+            el.completed_at = moment().format("llll");
+        } else {
+            el.completed = "no";
+            el.completed_at = null;
+        }
+        toggle_complete(el);
     };
     const deleteItem = (item) => {
         delete_todo(item.id);
@@ -40,14 +48,19 @@ const Todo_Container = ({ todos, get_todos, delete_todo, toggle_complete }) => {
                 ) : null}
                 {todos.map((el) => {
                     return (
-                        <Card
-                            className={
-                                el.completed === "yes" ? "completed" : null
-                            }
-                            key={el.id}
-                            onClick={(e) => markComplete(e, el)}
-                        >
-                            <CardHeader>{el.name}</CardHeader>
+                        <Card key={el.id} onClick={(e) => markComplete(e, el)}>
+                            <CardHeader
+                                className={
+                                    el.completed === "yes" ? "completed" : null
+                                }
+                            >
+                                {el.name}
+                            </CardHeader>
+                            <CardTitle>
+                                {el.completed_at !== null
+                                    ? `Completed at: ${el.completed_at}`
+                                    : null}
+                            </CardTitle>
                             <CardBody>
                                 <CardText>{el.description}</CardText>
                                 <Button

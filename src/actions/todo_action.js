@@ -1,4 +1,5 @@
 import { Axios } from "../utils/axios";
+import moment from "moment";
 export const ADD_TODO = "ADD_TODO";
 export const GET_TODO = "GET_TODO";
 export const DELETE_TODO = "DELETE_TODO";
@@ -31,11 +32,12 @@ export const delete_todo = (id) => async (dispatch) => {
     }
 };
 
-export const toggle_complete = (id, data) => async (dispatch) => {
+export const toggle_complete = (el) => async (dispatch) => {
     try {
-        const response = await Axios().put(
-            `/todos/${id}/toggleComplete/${data}`
-        );
+        const response = await Axios().put(`/todos/${el.id}/toggleComplete/`, {
+            completed_at: el.completed_at,
+            complete: el.completed,
+        });
         dispatch({ type: TOGGLE_COMPLETE, payload: response.data });
     } catch (error) {
         dispatch({ type: TOGGLE_COMPLETE, payload: error });
