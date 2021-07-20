@@ -4,26 +4,26 @@ import { get_todos } from "../../actions/todo_action";
 import "./stats.scss";
 
 const Stats = ({ todos, get_todos }) => {
-    useEffect(() => {
-        get_todos();
-    }, [get_todos]);
+	useEffect(() => {
+		get_todos();
+	}, [get_todos]);
 
-    return (
-        <section className="stat_box">
-            <p>
-                Pending todos:{" "}
-                {todos.filter((todo) => todo.completed === "no").length}
-            </p>
-            <p>
-                Completed todos:{" "}
-                {todos.filter((todo) => todo.completed === "yes").length}
-            </p>
-        </section>
-    );
+	return (
+		<section className="stat_box">
+			<p>
+				Pending todos:{" "}
+				{todos & todos.filter((todo) => todo.completed === "no").length}
+			</p>
+			<p>
+				Completed todos:{" "}
+				{todos.filter((todo) => todo.completed === "yes").length}
+			</p>
+		</section>
+	);
 };
 const mapStateToProps = (state) => {
-    return {
-        todos: state.todos,
-    };
+	return {
+		todos: state.todos,
+	};
 };
 export default connect(mapStateToProps, { get_todos })(Stats);
