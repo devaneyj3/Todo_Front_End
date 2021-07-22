@@ -8,15 +8,21 @@ const Stats = ({ todos, get_todos }) => {
 		get_todos();
 	}, [get_todos]);
 
+	console.log(todos);
+
 	return (
 		<section className="stat_box">
 			<p>
-				Pending todos:{" "}
-				{todos & todos.filter((todo) => todo.completed === "no").length}
+				Pending todos:
+				{todos.length < 1
+					? 0
+					: todos.filter((todo) => todo.completed === false).length}
 			</p>
 			<p>
 				Completed todos:{" "}
-				{todos.filter((todo) => todo.completed === "yes").length}
+				{todos.length < 1
+					? 0
+					: todos.filter((todo) => todo.completed === true).length}
 			</p>
 		</section>
 	);

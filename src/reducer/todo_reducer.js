@@ -4,7 +4,6 @@ import {
 	DELETE_TODO,
 	TOGGLE_COMPLETE,
 } from "../actions/todo_action";
-import moment from "moment";
 
 const initialState = {
 	todos: [],
@@ -25,9 +24,13 @@ const TodoReducer = (state = initialState, action) => {
 				todos: state.todos.filter((todo) => todo.id !== action.payload),
 			};
 		case TOGGLE_COMPLETE:
-			const todoToFind = state.todos.find((todo) => todo.id === action.id);
-			todoToFind.completed = !todoToFind.completed;
-			todoToFind.completed_at = moment().format("llll");
+			let todoToFind = state.todos.find((todo) => todo.id === action.id);
+			if (todoToFind) {
+				todoToFind.completed = action.completed;
+				todoToFind.completed_at = action.completed_at;
+			} else {
+				console.log("this item is already deleted");
+			}
 			return {
 				todos: [...state.todos],
 			};

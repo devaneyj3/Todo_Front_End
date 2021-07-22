@@ -1,6 +1,7 @@
 import { API, graphqlOperation } from "aws-amplify";
 import { createTodo, updateTodo, deleteTodo } from "../graphql/mutations";
 import { listTodos } from "../graphql/queries";
+import moment from "moment";
 export const ADD_TODO = "ADD_TODO";
 export const GET_TODO = "GET_TODO";
 export const DELETE_TODO = "DELETE_TODO";
@@ -28,9 +29,7 @@ export const get_todos = () => async (dispatch) => {
 
 export const delete_todo = (id) => async (dispatch) => {
 	try {
-		await await API.graphql(
-			graphqlOperation(deleteTodo, { input: { id: id } })
-		);
+		await API.graphql(graphqlOperation(deleteTodo, { input: { id: id } }));
 
 		dispatch({ type: DELETE_TODO, payload: id });
 	} catch (err) {
@@ -42,7 +41,11 @@ export const toggle_complete = (todo) => async (dispatch) => {
 	try {
 		const response = await API.graphql(
 			graphqlOperation(updateTodo, {
-				input: { id: todo.id, completed: !todo.completed },
+				input: {
+					id: todo.id,
+					completed: !todo.completed,
+					completed_at: moment().format("YYYY-MM-DD"),
+				},
 			})
 		);
 
@@ -50,6 +53,7 @@ export const toggle_complete = (todo) => async (dispatch) => {
 			type: TOGGLE_COMPLETE,
 			id: response.data.updateTodo.id,
 			completed: response.data.updateTodo.completed,
+			completed_at: response.data.updateTodo.completed_at,
 		});
 	} catch (error) {
 		dispatch({ type: TOGGLE_COMPLETE, payload: error });

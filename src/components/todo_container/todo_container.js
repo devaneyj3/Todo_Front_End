@@ -28,6 +28,14 @@ const Todo_Container = ({ todos, get_todos, delete_todo, toggle_complete }) => {
 	const deleteItem = (item) => {
 		delete_todo(item.id);
 	};
+
+	const toggleDoneOrNot = (todo) => {
+		if (todos.includes(todo)) {
+			toggle_complete(todo);
+		} else {
+			return;
+		}
+	};
 	return (
 		<div className="todo_container">
 			<section className="card_container">
@@ -36,10 +44,7 @@ const Todo_Container = ({ todos, get_todos, delete_todo, toggle_complete }) => {
 				) : (
 					todos.map((el) => {
 						return (
-							<Card
-								key={el.id}
-								onClick={() => toggle_complete(el)}
-								className={el.completed ? "completed" : null}>
+							<Card key={el.id} className={el.completed ? "completed" : null}>
 								<CardHeader>{el.name}</CardHeader>
 								<CardTitle>
 									{!el.completed ? (
@@ -52,6 +57,9 @@ const Todo_Container = ({ todos, get_todos, delete_todo, toggle_complete }) => {
 									<CardText>{el.description}</CardText>
 									<Button color="danger" onClick={() => deleteItem(el)}>
 										Delete
+									</Button>
+									<Button color="info" onClick={() => toggleDoneOrNot(el)}>
+										{el.completed ? "Pending" : "Done"}
 									</Button>
 								</CardBody>
 								<CardFooter>
