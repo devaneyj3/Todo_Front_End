@@ -15,12 +15,11 @@ Amplify.configure(awsExports);
 const mw = [thunk, logger];
 const store = createStore(TodoReducer, applyMiddleware(...mw));
 
-console.log(store.getState());
 function App() {
 	return (
 		<Provider store={store}>
 			<div className="App">
-				<section className="stat_form">
+				<section className="forms">
 					<TodoForm />
 					<Stats />
 				</section>

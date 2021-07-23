@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { create_todo } from "../../actions/todo_action";
 import { connect } from "react-redux";
 import "./todo_form.scss";
+import { Button } from "reactstrap";
 const Todo_Form = ({ create_todo }) => {
 	const [info, setInfo] = useState({
 		name: "",
@@ -23,24 +24,26 @@ const Todo_Form = ({ create_todo }) => {
 		setInfo({ ...info, [e.target.name]: e.target.value });
 	};
 	return (
-		<div className="todo_form">
-			<form onSubmit={submit}>
-				<input
-					type="text"
-					placeholder="Enter Your Todo"
-					name="name"
-					value={info.name}
-					onChange={change}
-				/>
-				<textarea
-					placeholder="Enter Description"
-					name="description"
-					value={info.description}
-					onChange={change}
-				/>
-				<input type="submit" />
-			</form>
-		</div>
+		<form onSubmit={submit}>
+			<input
+				className="form_item"
+				type="text"
+				placeholder="Enter Your Todo"
+				name="name"
+				value={info.name}
+				onChange={change}
+			/>
+			<textarea
+				className="form_item"
+				placeholder="Enter Description"
+				name="description"
+				value={info.description}
+				onChange={change}
+			/>
+			<Button color="success" className="form_item" type="submit">
+				Submit
+			</Button>
+		</form>
 	);
 };
 

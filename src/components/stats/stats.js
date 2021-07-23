@@ -11,19 +11,21 @@ const Stats = ({ todos, get_todos }) => {
 	console.log(todos);
 
 	return (
-		<section className="stat_box">
-			<p>
-				Pending todos:
-				{todos.length < 1
-					? 0
-					: todos.filter((todo) => todo.completed === false).length}
-			</p>
-			<p>
-				Completed todos:{" "}
-				{todos.length < 1
-					? 0
-					: todos.filter((todo) => todo.completed === true).length}
-			</p>
+		<section className="stat_form">
+			<section className="stat_box">
+				<p>
+					Pending todos:
+					{todos.length < 1
+						? 0
+						: todos.filter((todo) => todo.completed === false).length}
+				</p>
+				<p>
+					Completed todos:{" "}
+					{todos.length < 1
+						? 0
+						: todos.filter((todo) => todo.completed === true).length}
+				</p>
+			</section>
 		</section>
 	);
 };

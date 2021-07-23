@@ -1,11 +1,10 @@
 
 .App {
   margin: 5%;
-  .stat_form {
+  .forms {
     display: flex;
-    height: 250px;
-    margin: 10%;
-    justify-content: flex-end;
+    justify-content: space-between;
+    margin: 10%
   }
 }
 li {
