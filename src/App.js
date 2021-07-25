@@ -19,6 +19,9 @@ function App() {
 	return (
 		<Provider store={store}>
 			<div className="App">
+				<section className="header">
+					<h1>Todo Tracker</h1>
+				</section>
 				<section className="forms">
 					<TodoForm />
 					<Stats />

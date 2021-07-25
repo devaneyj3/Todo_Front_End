@@ -1,6 +1,9 @@
 
 .App {
   margin: 5%;
+  .header {
+    text-align: center;
+  }
   .forms {
     display: flex;
     justify-content: space-between;
